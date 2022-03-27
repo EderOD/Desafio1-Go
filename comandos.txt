@@ -1,0 +1,14 @@
+FROM PHP:7.4-alpine
+WORKDIR /var/www
+RUN rm -rf /var/www/html
+COPY --from=builder /var/www/laravel .
+RUN chown _R www-data:www-data /var/www
+EXPOSE 9000
+CMD["PHP-FPM"]
+
+
+docker build -t eddin/laravel:prod laravel -f laravel/Dockerfile.prod
+
+docker images | grep laravel
+
+https://docs.docker.com/language/golang/build-images/
